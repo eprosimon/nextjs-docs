@@ -1,11 +1,166 @@
-# Introduction
- 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
+# Question 1
 
-## What is Nextra?
+## 5 Most Favorite
+- Help train and onboard new support teammates
+> This helps new members feel productive and provides better experience for the customers when new hires feel confident in their responses. 
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+- Work with engineering teams during incidents and provide updates to internal and external stakeholders
+> The support team has key insights that can help the engineering team determine the scope of impact and the time issues started, without good communication here resolution of the issue will likely take longer.
+>During incidents it is especially important to have clear communication with the external stakeholders as they will have pressure to provide updates in their managers/users, this is not possible if we do not provide them with the details. 
 
-## Documentation
+- Dig through logs to troubleshoot a customer's broken project
+> As the support team we will be best equipped to review the logs, identify the issue and get the customer back on the happy path, after all Vercel is there to remove the deployment and scaling issues for developers so they can focus on delighting their users with their application.  
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+- Work with people to figure out if Vercel is suitable for their use case
+> Support have a keen insight into the issues that are faces by users and can therefore spot potential conflicts or struggles that a customer would otherwise need to learn the hard way after investing time migrating or building a solution. 
+We can prevent such issues or raise warnings early. 
+
+- Write and maintain support articles and docs pages
+> Good docs and support articles are key to reducing contact rates and allowing users to self serve finding solutions quickly while they are in a flow state of developing their application.
+This data can also be used to train AI/ML models that can be used for automated response generation on community or chat platforms as well as potentially as internal notes to support agents. 
+
+
+## 5 Least Favorite
+- Find and recruit teammates for the support team
+> I appreciate that this is an important part of providing good customer support experience, but I personally enjoy being more directly involved with resolving customer issues.
+I do appreciate being involved with the recruitment process if the intended candidate is to be a part of the specific team I work in.  
+
+- Manage a support team
+> Similar to the recruitment statement the management of other support agents is a key aspect of a smoothly functioning support system but I believe my skills are best suited to technical troubleshooting rather than management. 
+
+- Run ticket review sessions to make sure tone is consistent
+> I prefer a more proactive approach to ensuring consistent tone through the use of a shared repository of response components that is used by all the support agents, this can be updated centrally to serve as a skeleton for replies. 
+
+- Respond to queries on Twitter, Reddit, Hacker News and other 3rd party sites
+> As theses systems do not have direct ties to a customers account I feel that they are best suited to generic issues that can be addressed by the documentation or guides. 
+Improving public docs or creating a video tutorial would be a better use of time to address these types of issues where you are not able to access a users account directly. 
+There can also be a blur between a personal profile and acting as a representative of Vercel on such platforms, I prefer to not risk having my personal opinions be viewed as a companies opinions and therefore keep work and personal life separate on social media. 
+
+- Scheduling time-off coverage and collaborating as part of a growing cohesive support team
+> I understand the importance of submitting my preferences for leave in a timely manner to time for planning and ensuring coverage. 
+The scheduling of time off should ideally be handled by an automated system that flags any conflicts in preferences to management to raise with the parties involved. 
+I prefer activities that more directly assist my colleagues or directly helping customers in troubleshooting their issues  
+
+
+
+# Question 2
+I enjoy the finding ways to optimize or automate workflows or common actions through process improvements or the creation of tools that can then be shared with colleagues to allow us to enjoy our everyday work more as well as more efficiently helping customers resolve their issues. 
+
+In the past these have focused on bash script or CLI tool development which is a good choice in some instances, but I would like to improve my skills with developing web based tools as these can be accessed more easily without the need for installation. 
+In some cases such tools could also be made available to customers directly, that can help customers self serve when they prefer to or in cases such as the community provide an option to access the knowledge of the support team when they do not have access to tickets directly. 
+
+
+# Question 3 
+ `Customer issue: Not able to access resources on their LAN network while running the Warp application. `
+
+I first ensured that I had the logs from the customers device to be able to determine the state of the device using authoritative data rather than just relying on details mentioned by the customer. 
+
+I requested confirmation of the intended outcome and use case as well as the behavior that the customer saw asking for specific IP address example, ensuring that all other access was working as intended such as remote networks and general internet access. 
+> This ensures that I do not waste time assuming I know the issue is in cases where the initial problem statement is not clear. 
+
+I then reviewed the configuration of the deployment in the customers account in light of the details they provided.
+I saw a mismatch in the deployment configuration and their intended outcome.
+
+I had been able to spot this as I had the same issue in my testing lab when I was testing the products as part of my onboarding process. 
+
+The issue related to the split tunnel configurations on the profile for the warp application that was assigned to the user, they had one profile that was configured for a remote user and the issue was that the user was not able to print or access resources in the LAN when they were physically in the office. 
+
+I provided the customer with the documentation regarding split tunnel configuration as well as the recommendation to configure different profiles for the different locations. 
+I also shared that there is a specific option called managed networks that would allow the profiles to automatically swap when a user was in the office so the multiple profiles would not cause more admin on their end as the customer had initially feared. 
+
+The issue was confirmed to be resolved by the customer after implementing the suggestions I provided. 
+
+
+
+
+#  Question 4
+
+### Edge Functions
+As edge functions use the edge runtime in the region that is closest to the user they can respond to requests faster as there is less latency and they do not suffer from the same cold start issues as the serverless functions. 
+Edge functions should not be used if a datastore is involved, if there is a chance that the users could make a request from a location that is far from the datastore region as the edge location would then have high latency between the datastore and the compute. 
+
+### Serverless Functions
+Serverless functions are scoped to a region and therefore are best suited to use cases that involve communication to a datastore as the communication between the function and the datastore is more likely to involve a high number of blocking requests.
+The region for the serverless function should be the same as that of the datastore to ensure minimal latency between the datastore and the compute.
+Serverless functions can suffer from delays due to cold starts for applications that do not have high enough traffic volume to keep the instance warm. 
+
+Partial pre-rendering can be used to render any static assets on the application so that they user is not left with a blank page in the event of a cold start, the serverless function data can be streamed into the skeleton from the partial pre-render
+
+### Edge Middleware
+As Edge middleware uses the edge runtime and runs before a request is processed, it is best suited to redirects, rewrites, header modification A/B testing and feature flag configuration. 
+
+
+# Question 5 
+### Troubleshooting process 
+My first priority will be to determine whether this has worked in the past for the customer and gather as much information as possible especially as this is an unfamiliar area. 
+I would then attempt to replicate the issue on a test environment if possible with the actual failing code or if not then with a hello world type deployment for the specific framework, looking up the documentation for the framework to spot any potential issues. 
+
+The timeframes will help narrow the scope of my search as well as allow me review any potential changes from our end. 
+
+### Questions I would ask: 
+- Has this build completed successfully in the past? If so what changes were made since the last successful build. 
+- If no specific changes had been made, are you able to provide a timestamp or timeframe when you stated seeing the issue?
+- Are you able to provide me with the exact details of the stack being used? 
+- Is there any means for me to be given access to a development version of the code that is not building. 
+
+
+# Question 6
+
+> Hi, thanks for your reply. 
+>
+>I am sorry that you are feeling frustrated, but you did the right thing in contacting us for assistance. 
+>I understand that it may seem like I am asking questions rather than looking into a solution already. 
+>
+>I am asking the questions to help determine the next best step as we work towards a resolution together, the answers to the questions I had asked will allow me to investigate this issue further and determine whether it is a platform issue as you have suggested. 
+>
+>The answers to the questions will provide me with the details required to attempted to replicate the issue on a test account if possible.
+>If I am able to replicate the issue and not resolve it with the tools at my disposal, I can raise this issue with the engineering department providing them with my findings and the time frames provided. 
+>This will greatly assist them in their investigation and help get you back on track if it is a platform issue. 
+>
+>Please let us know if you have any further questions or require additional clarification in order to answer the questions I provided in my earlier response. 
+>
+>We look forward to hearing from you soon. 
+>
+>Regards 
+>Erich Simon 
+>Vercel Support
+
+
+# Question 7
+As it appears that the best practice for redirects depends on the specific framework and use-case I would point the customer to the Vercel documentation:  
+https://vercel.com/docs/edge-network/redirects
+
+I would ask them to confirm their framework and intended outcome of the redirect providing an example of the before and after URL
+
+The customer may need to make a choice regarding preservation of the path and query string when doing the redirect. 
+
+Based on the details from the customer I would determine the best option and test this in my account on the same framework to make sure it behaves as intended before providing the example code to the customer guidance. 
+
+
+# Question 8
+There are a few options depending on the needs of the user, mainly if they want the whole project not be indexed or only the preview deployments, additionally having it not be indexed suggests that the user may wish to not have the application be publicly available at this point in time
+
+I would ask the user to confirm which of the options best match their intended outcome. 
+
+To prevent indexing on preview builds the user can set a X-Robots-Tag tag as detailed in the documentation:  https://vercel.com/docs/deployments/preview-deployments#search-engine-indexing
+This can be set to `noindex` in the main deployment if that is desired as well. 
+
+Alternative options include vercel authentication or password protection on all deployments, or limiting to trusted IPs. 
+The user can also block access for specific crawlers via the firewall based on on IP/user-agent or JA4 fingerprints 
+
+# Question 9
+I suspect the most common questions relate to cases where a deployed application is not behaving as expected or intended from the customers point of view. 
+For example that the do not receive the request they expect or the request is not as fast as they expect it should be etc. 
+
+Short term ensuring that the support team are aware of such issues and have snippets of clear questions for information gathering, and up to date responses for common issues in form that can easily be used in responses to customers will help address these tickets.
+
+Longer term:
+Ensuring that support documents and FAQ sections remain up to date and clearly explained.
+Investigating options for trace tooling to help determine where issues are in the complex interactions between function locations and runtimes. 
+Clear video and written tutorials and guides as people learn in different ways. 
+In some cases issues are caused by a mismatch in expectations such as whether a response is cached by default or not, in some cases such as with next.js 15 changes to the framework behavior in relation to caching are the best means to resolve such issues. 
+
+# Question 10 
+On the option to create a sharable link you need to be on a paid plan or trial to unlock the `Anyone with a link` option, this will be fine in my case as I have not signed up to the trial in the past but it would seem to be a paywall to the application process if I had already used this trial option. 
+
+
